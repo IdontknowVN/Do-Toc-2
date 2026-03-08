@@ -36,10 +36,9 @@ class Player:
         self.skill_cooldown = 0
         self.skill_max_cooldown = 10 * FPS
         
-        # --- THÊM THÔNG SỐ NẠP ĐẠN ---
         self.is_reloading = False
         self.reload_timer = 0
-        self.reload_time_max = int(2.5 * FPS) # 2.5 giây (150 frames)  
+        self.reload_time_max = int(2.5 * FPS) 
 
     def update(self):
         if self.shoot_cooldown > 0:
@@ -47,15 +46,13 @@ class Player:
         if self.skill_cooldown > 0:
             self.skill_cooldown -= 1
             
-        # --- XỬ LÝ ĐẾM NGƯỢC THỜI GIAN NẠP ĐẠN ---
         if self.is_reloading:
             self.reload_timer -= 1
             if self.reload_timer <= 0:
-                self.ammo = MAX_AMMO       # Nạp đầy đạn
-                self.is_reloading = False  # Kết thúc trạng thái nạp đạn
+                self.ammo = MAX_AMMO       
+                self.is_reloading = False 
 
     def reload(self):
-        # Chỉ bắt đầu nạp khi đạn chưa đầy và không phải đang nạp dở
         if self.ammo < MAX_AMMO and not self.is_reloading:
             self.is_reloading = True
             self.reload_timer = self.reload_time_max
